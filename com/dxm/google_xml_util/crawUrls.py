@@ -1,10 +1,13 @@
 # encoding:utf-8
+import copy
+from datetime import datetime, timedelta
+from xml.etree import ElementTree as ET
+
+import pytz
 import requests
 from bs4 import BeautifulSoup
-import copy
-from xml.etree import ElementTree as ET
-from xml.etree.ElementTree import Element
-from datetime import datetime, timezone, timedelta
+import sys
+
 
 
 class xml_util:
@@ -20,9 +23,9 @@ class xml_util:
 
     def get_utc_time(self, zone):
         # 创建时区UTC+00:00
-        tz_utc = timezone(timedelta(hours=zone))
+        #tz_utc = timezone(timedelta(hours=zone))
         # 获得带时区的UTC时间
-        current_time_utc = datetime.utcnow().replace(tzinfo=tz_utc, microsecond=0)
+        current_time_utc = datetime.utcnow().replace(tzinfo=pytz.timezone('UTC'), microsecond=0)
         timestr = current_time_utc.strftime("%Y-%m-%dT%H:%M:%S%z")
         new_time_str = "{}:{}".format(timestr[0:-2], timestr[-2:])
         return new_time_str
@@ -30,13 +33,12 @@ class xml_util:
     def parseTemplateXml(self):
         self.tree = ET.parse("template.xml")
         ET.register_namespace("", "http://www.sitemaps.org/schemas/sitemap/0.9")
-        root: Element = self.tree.getroot()
+        root = self.tree.getroot()
         for urlTag in list(root):
             urls = list(urlTag)
             for url in urls:
-                url2: Element = url
                 if self._tag_prefix + self._lastmod_tag == url.tag:
-                    url2.text = self.date_str
+                    url.text = self.date_str
         self.url_tag = urlTag
 
     def mod_tag(self, tag, locValue, lastmodValue, priority='0.6'):
@@ -60,7 +62,7 @@ class xml_util:
 
 
 def crawb(name, page_url):
-    page = requests.get(page_url).text
+    page = requests.get(page_url,verify=False).text
     soup = BeautifulSoup(page, 'html.parser')
     links = []
     for link in soup.find_all(name='a'):
@@ -72,7 +74,7 @@ def crawb(name, page_url):
 
 def crawMainUrl():
     url = 'https://www.bigseller.com/help/index.htm'
-    page = requests.get(url).text
+    page = requests.get(url,verify=False).text
     soup = BeautifulSoup(page, 'html.parser')
     languageMap = {}
     for alink in soup.find_all(name="a", attrs={"href": "javascript:"}):
@@ -99,6 +101,8 @@ def crawMainUrl():
 
 
 if __name__ == "__main__":
+    reload(sys)
+    sys.setdefaultencoding("utf-8")
     urls = crawMainUrl()
     util = xml_util()
     util.parseTemplateXml()
