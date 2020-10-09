@@ -7,6 +7,7 @@ import pytz
 import requests
 from bs4 import BeautifulSoup
 import sys
+import urllib3
 
 
 
@@ -101,6 +102,7 @@ def crawMainUrl():
 
 
 if __name__ == "__main__":
+    urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
     reload(sys)
     sys.setdefaultencoding("utf-8")
     urls = crawMainUrl()
