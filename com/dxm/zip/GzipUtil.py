@@ -1,0 +1,12 @@
+import base64
+import gzip
+from io import StringIO
+
+
+newstr = gzip.compress("haha".encode("utf-8"))
+line ='H4sIAAAAAAAAAIuuVkosKSnKTCotSY3PTFGyMjY1N9JBEstLzE1VslJyzni4a2mJQk7mw93tpUrICjKL44tSC0szi1KButMSc4pTkWWT81NA2tF1JJcWl+TnYlEPkstITc7OLy3BLpuZm5ieikWqLDGnNLVYySq6WgnsDTNTUxMdJbAo0P6yxAwg1H26cd6zhuWojslNh7gPaHZxak5qcgnIHyVFpalgIZhDQQK1sbU66MFlZGGCJbR8Dy8oVSh+uGt9Mu6gglhBpZBCN4z4gDIzMEIEk9/hRaXkhA7YEmzBY2hobIAlfLwPr03OUCjJOLbh4e7Zgz+MDC0NTCwQoWSsoKtglp1OfkDpwI01RQp8QyOguYamVDLYAGGwBchcA0rMxRKzlkaGluaGllgiN8PRw5F6JQSWWKNGlBqbW1haGiAFUrBnlKshBSVDLAB4dMpOSgUAAA=='
+
+
+datas = gzip.decompress(base64.b64decode(line))
+
+print(str(datas,encoding='utf-8'))
