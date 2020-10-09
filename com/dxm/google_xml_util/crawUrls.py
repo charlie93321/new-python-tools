@@ -1,14 +1,14 @@
-# encoding:utf-8
+# -*- coding: utf-8 -*-
 import copy
 from datetime import datetime
 from xml.etree import ElementTree as ET
 
 import pytz
 import requests
+import urllib3
 from bs4 import BeautifulSoup
 import sys
-import urllib3
-
+from urllib3.exceptions import InsecureRequestWarning
 
 
 class xml_util:
@@ -103,18 +103,20 @@ def crawMainUrl():
 
 
 if __name__ == "__main__":
+    #生成文件的目录
     #dir_path = sys.argv[1]
-    dir_path = r'C:\Users\DXM_0093\PycharmProjects\flaskWeb\com\dxm\google_xml_util'
-    urllib3.disable_warnings()
+    dir_path=r'C:\Users\DXM_0093\PycharmProjects\flaskWeb\com\dxm\google_xml_util'
+    # 编解码 设置默认编码方式
     reload(sys)
     sys.setdefaultencoding("utf-8")
+    # 去除警告
+    requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+    urllib3.disable_warnings()
+
     urls = crawMainUrl()
     util = xml_util(dir_path)
     util.parseTemplateXml()
 
-    '''
-    size :
-    '''
     size = len(urls)
     index = 0
     for url in urls:
@@ -125,5 +127,6 @@ if __name__ == "__main__":
         print("进度=======>{}%,name=>{},links_size=>{}".format(round(index * 100 / size),name,len(link_urls)))
         for link_url in link_urls:
             util.write_url_tag(link_url)
-    util.write_file('sitemap.xml')
+    util.write_file('sitmap.xml')
     print("--------------生成文件完毕{}---------------".format(util.date_str))
+
