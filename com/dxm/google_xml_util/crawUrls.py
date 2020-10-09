@@ -1,6 +1,6 @@
 # encoding:utf-8
 import copy
-from datetime import datetime, timedelta
+from datetime import datetime
 from xml.etree import ElementTree as ET
 
 import pytz
@@ -12,13 +12,14 @@ import urllib3
 
 
 class xml_util:
-    def __init__(self):
+    def __init__(self,dir_path):
         self._zero_zone = 0
         self._tag_prefix = '{http://www.sitemaps.org/schemas/sitemap/0.9}'
         self._loc_tag = 'loc'
         self._lastmod_tag = 'lastmod'
         self._priority_tag = 'priority'
         self.date_str = self.get_utc_time(self._zero_zone)
+        self.dir_path=dir_path
         self.tree = None
         self.url_tag = None
 
@@ -32,7 +33,7 @@ class xml_util:
         return new_time_str
 
     def parseTemplateXml(self):
-        self.tree = ET.parse("template.xml")
+        self.tree = ET.parse("{}/template.xml".format(self.dir_path))
         ET.register_namespace("", "http://www.sitemaps.org/schemas/sitemap/0.9")
         root = self.tree.getroot()
         for urlTag in list(root):
@@ -59,7 +60,7 @@ class xml_util:
         self.tree.getroot().append(new_tag_url)
 
     def write_file(self, file_name):
-        self.tree.write(file_name, encoding='utf-8', xml_declaration=True)
+        self.tree.write("{}/{}".format(self.dir_path,file_name), encoding='utf-8', xml_declaration=True)
 
 
 def crawb(name, page_url):
@@ -102,11 +103,12 @@ def crawMainUrl():
 
 
 if __name__ == "__main__":
+    dir_path = sys.argv[1]
     urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
     reload(sys)
     sys.setdefaultencoding("utf-8")
     urls = crawMainUrl()
-    util = xml_util()
+    util = xml_util(dir_path)
     util.parseTemplateXml()
 
     '''
