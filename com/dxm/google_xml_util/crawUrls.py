@@ -103,8 +103,9 @@ def crawMainUrl():
 
 
 if __name__ == "__main__":
-    dir_path = sys.argv[1]
-    urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+    #dir_path = sys.argv[1]
+    dir_path = r'C:\Users\DXM_0093\PycharmProjects\flaskWeb\com\dxm\google_xml_util'
+    urllib3.disable_warnings()
     reload(sys)
     sys.setdefaultencoding("utf-8")
     urls = crawMainUrl()
@@ -124,5 +125,5 @@ if __name__ == "__main__":
         print("进度=======>{}%,name=>{},links_size=>{}".format(round(index * 100 / size),name,len(link_urls)))
         for link_url in link_urls:
             util.write_url_tag(link_url)
-    util.write_file('sitmap.xml')
+    util.write_file('sitemap.xml')
     print("--------------生成文件完毕{}---------------".format(util.date_str))
