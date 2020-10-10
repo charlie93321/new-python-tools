@@ -43,6 +43,10 @@ class xml_util:
                     url.text = self.date_str
         self.url_tag = urlTag
 
+
+
+
+
     def mod_tag(self, tag, locValue, lastmodValue, priority='0.6'):
         for tg in list(tag):
             if self._tag_prefix + 'loc' == tg.tag:
@@ -127,6 +131,6 @@ if __name__ == "__main__":
         print("进度=======>{}%,name=>{},links_size=>{}".format(round(index * 100 / size),name,len(link_urls)))
         for link_url in link_urls:
             util.write_url_tag(link_url)
-    util.write_file('sitmap.xml')
+    util.write_file('sitemap.xml')
     print("--------------生成文件完毕{}---------------".format(util.date_str))
 

@@ -1,14 +1,11 @@
 import base64
 from random import Random
 
-from flask import Flask
-
-app = Flask(__name__)
-
-
+from flask import Flask, send_from_directory
+app = Flask(__name__, template_folder="templates", static_folder="static", static_url_path="/static")
 @app.route('/')
 def hello_world():
-    return 'hello world'
+      return "hello"
 
 
 @app.route('/lazada/label')
