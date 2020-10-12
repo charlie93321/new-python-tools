@@ -1,0 +1,58 @@
+{
+  "id": 1177,
+  "shopId": 843,
+  "name": "Headphone J-18 / J18 MACARON CARTOON Stereo Extra Bass - Merah Muda",
+  "itemSku": "产品sku",
+  "images": "https://ecs7.tokopedia.net/img/cache/700/product-1/2020/8/27/47240405/47240405_cd5fd51d-4646-4194-894e-2e482b71d27c_1280_1280,https://ecs7.tokopedia.net/img/cache/700/product-1/2020/8/24/47240405/47240405_c7337103-ef80-4c13-ad6a-e103f0314dda_700_700,https://ecs7.tokopedia.net/img/cache/700/product-1/2020/8/24/47240405/47240405_7c017ffc-7627-4818-8563-c8fbcb112add_800_800,https://ecs7.tokopedia.net/img/cache/700/product-1/2020/8/24/47240405/47240405_e00dfaec-69ae-4227-a491-9e6131c035ad_700_700",
+  "price": 30000,
+  "salePrice": null,
+  "stock": 157,
+  "saleStartDate": null,
+  "saleEndDate": null,
+  "variationEditVos": [
+    {
+      "id": 7287,
+      "optionName1": "N?u",
+      "optionName2": "New born",
+      "optionName3": null,
+      "variationSku": "产品sku-N?u-New born",
+      "variantIsPromotion": false,
+      "price": 30000,
+      "salePrice": 9000,
+      "stock": 68,
+      "saleStartDate": 1601308800000,
+      "saleEndDate": 1601395199000,
+      "saleStartDateStr": "2020-09-29 00:00:00",
+      "saleEndDateStr": "2020-09-29 23:59:59",
+      "priceStr": "30000",
+      "salePriceStr": "9000"
+    },
+    {
+      "id": 7288,
+      "optionName1": "N?u",
+      "optionName2": "6 - 8kg",
+      "optionName3": null,
+      "variationSku": "产品sku-N?u-6 - 8kg",
+      "variantIsPromotion": false,
+      "price": 40000,
+      "salePrice": 5000,
+      "stock": 89,
+      "saleStartDate": 1601308800000,
+      "saleEndDate": 1601567999000,
+      "saleStartDateStr": "2020-09-29 00:00:00",
+      "saleEndDateStr": "2020-10-01 23:59:59",
+      "priceStr": "40000",
+      "salePriceStr": "5000"
+    }
+  ],
+  "weight": 450,
+  "length": 12,
+  "height": 11,
+  "width": 35,
+  "unitId": 7,
+  "productType": "1",
+  "productTypeList": [
+    "1"
+  ],
+  "promotion": false
+}
