@@ -9,3 +9,8 @@ out
 gen
 .gitignore
 venv/Include/
+com/__init__.pyc
+com/dxm/__init__.pyc
+com/dxm/flask_web/__init__.pyc
+com/dxm/flask_web/i18nLangApp.pyc
+*.xml

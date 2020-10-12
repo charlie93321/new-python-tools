@@ -7,7 +7,7 @@ with open("robots.txt","w")as f:
  f.write("Sitemap: https://www.bigseller.com/sitemap.xml".encode("utf-8"))'''
 import requests
 
-resp = requests.get('http://localhost:19080/robots.txt')
+resp = requests.get('https://test.bigseller.com/robots.txt')
 
 print resp.headers['Content-Type']
 
