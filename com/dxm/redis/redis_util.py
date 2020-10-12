@@ -1,3 +1,6 @@
+import gzip
+from StringIO import StringIO
+
 import redis
 from redis import StrictRedis
 
@@ -25,9 +28,25 @@ VALUES (93, '100*150mm', 'ship.config.label.template.size.thermal.fifteen', 1, 1
         '/10x15/label/shopee-je-my_15.ftl', 1);
 '''
 
+def gzip_compress(buf):
+    out = StringIO()
+    with gzip.GzipFile(fileobj=out, mode="w") as f:
+        f.write(buf)
+    return out.getvalue()
+
+
+def gzip_decompress(buf):
+    obj = StringIO(buf)
+    with gzip.GzipFile(fileobj=obj) as f:
+        result = f.read()
+    return result
+
 redis = StrictRedis(host='124.70.208.68', port=6379, db=0, password='hadoop')
 
-print(redis.set(name='shopee-my-express-online-sql',value=lines))
 
-print redis.get('shopee-my-express-online-sql')
+redis.set(name='shopee-my-express-online-sql-gzip',value=gzip_compress(lines))
+
+print len(gzip_decompress(redis.get('shopee-my-express-online-sql-zip')))
+print len(redis.get('shopee-my-express-online-sql-gzip'))
+
 redis.close()
