@@ -15,7 +15,7 @@ class BranchInfo:
     def current_branch(self, curbranch):
         self.current_branch = curbranch
 
-    def append_branch(self, branch: str):
+    def append_branch(self, branch):
         if branch.startswith("remotes"):
             newbranch = branch.replace("remotes/origin/", "")
             if self.find_branch(newbranch):
@@ -67,5 +67,7 @@ r.execute('git branch -r -d  origin/wip-draftbatchSaveAndPublish-zxy')
 r.execute('git push origin :{}'.format('wip-draftbatchSaveAndPublish-zxy'))
 
 '''
-
-print(look_all_branch())
+branch_del='wip-shopeeMYprintlabel-zxy'
+#r.execute('git branch -d {}'.format(branch_del))
+#r.execute('git branch -r -d  origin/{}'.format(branch_del))
+#print(look_all_branch())
