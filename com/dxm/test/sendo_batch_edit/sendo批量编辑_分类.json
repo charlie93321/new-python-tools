@@ -1,0 +1,44 @@
+{
+  "code": 0,
+  "msg": "Successful",
+  "platformMsg": "",
+  "defaultMsg": "",
+  "data": {
+    "id": 1153,
+    "puid": 7,
+    "shopId": 843,
+    "name": "item543887",
+    "mainImage": "https://cf.shopee.co.id/file/0d0f62cc0a520356faf4a7d9637ee00f",
+    "categoryId": null,
+    "categoryName": null,
+    "site": null,
+    "sourceSite": "ID",
+    "platform": "sendo",
+    "sourcePlatform": "shopee",
+    "sourceCategoryId": "18200",
+    "variantTheme": null,
+    "sourceThemeList": null,
+    "sourceCategoryPath": "Pakaian Pria > Atasan > Kaos",
+    "productCategoryPath": null,
+    "count": 0,
+    "variantAttrName": null,
+    "attrNameList": null,
+    "ids": null,
+    "variantAttrMapStr": null,
+    "mappingAttrMap": null,
+    "categoryRecords": [
+      {
+        "cid": 609,
+        "name": "Đồng hồ treo tường"
+      },
+      {
+        "cid": 6382,
+        "name": "Đồ bộ cho bé gái 1-4 tuổi"
+      }
+    ],
+    "attributes": null,
+    "categoryAttributes": null,
+    "brandRecords": null,
+    "idStr": "1153"
+  }
+}
