@@ -14,7 +14,7 @@ product_edit_vo = {
     "saleStartDate": "",
     "saleEndDate": "",
     "stock": "",
-    "weight": "450",
+    "weight": "",
     "length": "12",
     "width": "35",
     "height": "11",
