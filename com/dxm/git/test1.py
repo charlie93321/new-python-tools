@@ -60,7 +60,7 @@ def look_local_online_branch():
 
 branchs = look_local_online_branch()
 
-branchs.print_branches()
+#branchs.print_branches()
 '''
 r.execute('git branch -d {}'.format('wip-generateInventorySku-hzf'))
 r.execute('git branch -r -d  origin/wip-draftbatchSaveAndPublish-zxy')
@@ -69,5 +69,10 @@ r.execute('git push origin :{}'.format('wip-draftbatchSaveAndPublish-zxy'))
 '''
 branch_del='wip-shopeeMYprintlabel-zxy'
 #r.execute('git branch -d {}'.format(branch_del))
-#r.execute('git branch -r -d  origin/{}'.format(branch_del))
+#r.execute('git push origin --delete  {}'.format(branch_del))
 #print(look_all_branch())
+
+bs = look_all_branch()
+for line in  bs.split("\n"):
+    if '-zxy' in line:
+        print line
