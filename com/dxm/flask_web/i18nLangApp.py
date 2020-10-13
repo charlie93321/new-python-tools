@@ -58,3 +58,4 @@ def i18n_delKey():
     if ps.has_key('key'):
         redisContext['cli'].delete(ps['key'])
     return json.dumps({"code":0})
+
