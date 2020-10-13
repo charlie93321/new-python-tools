@@ -73,7 +73,8 @@ def i18n_save():
         redisContext['cli'] = StrictRedis(host='124.70.208.68', port=6379, db=1, password='hadoop')
     data = json.loads(request.data, encoding='utf-8')
     rs = redisContext['cli'].get(data['key'])
-    if rs is not None or len(rs)==0:
+    if rs is None:
         redisContext['cli'].set(data['key'], request.data)
-        return json.dumps({"code":0})
-    return json.dumps({"code": 1})
+        return json.dumps({"code": 0})
+    if rs is not None:
+        return json.dumps({"code":1})

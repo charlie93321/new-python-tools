@@ -66,7 +66,12 @@ r.execute('git branch -d {}'.format('wip-generateInventorySku-hzf'))
 r.execute('git branch -r -d  origin/wip-draftbatchSaveAndPublish-zxy')
 r.execute('git push origin :{}'.format('wip-draftbatchSaveAndPublish-zxy'))
 
-'''
+
+
+wip-batchEditSendoProduct-zxy                    
+wip-shopeeMyExpressPrintLable-zxy                 
+wip-shopeeMyPoslajuQrcode-zxy                    
+  '''
 branch_del='wip-shopeeMYprintlabel-zxy'
 #r.execute('git branch -d {}'.format(branch_del))
 #r.execute('git push origin --delete  {}'.format(branch_del))
