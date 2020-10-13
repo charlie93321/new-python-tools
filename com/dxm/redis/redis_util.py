@@ -54,12 +54,9 @@ redis = StrictRedis(host='124.70.208.68', port=6379, db=1, password='hadoop')
 data = {
     "zh": "产品",
     "en": "Product SKU",
-    "in": "SKU Produk",
-    "th": "th",
-    "vi": "vi"
+    "version":1,
+    "desc":"xxxxxxxxxx"
 }
 
-redis.hset(name='html.listing.edit.comm.add.productSKU', key='content', value=json.dumps(data, ensure_ascii=False))
-redis.hset(name='html.listing.edit.comm.add.productSKU', key='version', value='1')
-redis.hset(name='html.listing.edit.comm.add.productSKU', key='desc', value='产品')
+redis.set(name='html.listing.edit.comm.add.productSKU', value=json.dumps(data, ensure_ascii=False))
 redis.close()
