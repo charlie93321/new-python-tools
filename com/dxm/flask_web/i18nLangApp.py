@@ -59,3 +59,21 @@ def i18n_delKey():
         redisContext['cli'].delete(ps['key'])
     return json.dumps({"code":0})
 
+@app.route('/i18n/update',methods = ["POST"])
+def i18n_update():
+    if redisContext['cli'] is None:
+        redisContext['cli'] = StrictRedis(host='124.70.208.68', port=6379, db=1, password='hadoop')
+    data=json.loads(request.data,encoding='utf-8')
+    redisContext['cli'].set(data['key'],request.data)
+    return json.dumps({"code":0})
+
+@app.route('/i18n/save',methods = ["POST"])
+def i18n_save():
+    if redisContext['cli'] is None:
+        redisContext['cli'] = StrictRedis(host='124.70.208.68', port=6379, db=1, password='hadoop')
+    data = json.loads(request.data, encoding='utf-8')
+    rs = redisContext['cli'].get(data['key'])
+    if rs is not None or len(rs)==0:
+        redisContext['cli'].set(data['key'], request.data)
+        return json.dumps({"code":0})
+    return json.dumps({"code": 1})

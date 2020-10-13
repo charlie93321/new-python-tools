@@ -52,11 +52,11 @@ redis = StrictRedis(host='124.70.208.68', port=6379, db=1, password='hadoop')
 # print len(gzip_decompress(redis.get('shopee-my-express-online-sql-zip')))
 # print len(redis.get('shopee-my-express-online-sql-gzip'))
 data = {
-    "zh": "产品",
-    "en": "Product SKU",
+    "zh": "产品变种sku需要在5-45个字符之间",
+    "en": "Please enter between 5-45 characters",
     "version":1,
-    "desc":"xxxxxxxxxx"
+    "desc":"sendo产品单位"
 }
 
-redis.set(name='html.listing.edit.comm.add.productSKU', value=json.dumps(data, ensure_ascii=False))
+redis.set(name='html.listing.edit.sendo.sku.invalid', value=json.dumps(data, ensure_ascii=False))
 redis.close()
