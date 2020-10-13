@@ -4,8 +4,52 @@
     <meta charset="UTF-8">
     <title>国际化配置页面</title>
     <link rel="stylesheet" href="static/pages/css/bootstrap.min.css">
+    <script type="text/javascript" src="static/pages/js/jquery.min.js"></script>
+    <script type="text/javascript" src="static/pages/js/bootstrap.min.js"></script>
 </head>
-<body>
+<body class="container">
 
+<div class="row" style="margin-top: 15px;margin-bottom: 20px">
+    <input class="form-control input col-md-12" placeholder="pattern" id="keys"/>
+</div>
+
+<div class="row">
+    <table class="table .table-striped .table-bordered .table-hover .table-condensed">
+        <thead>
+        <th>key</th>
+        <th>value</th>
+        <th>描述</th>
+        <th>版本号</th>
+        <th>操作</th>
+        </thead>
+        <tbody id="data">
+
+        </tbody>
+    </table>
+</div>
 </body>
+<script>
+    $(function () {
+
+        function search_keys() {
+            var keys = $("#keys").val();
+            var params = "";
+            if (keys) {
+                params = ("?pattern=" + keys.trim())
+            }
+            $.get('/i18n/keys' + params, function (data) {
+
+            });
+        }
+
+        $('#keys').bind('keypress', function (event) {//监听sim卡回车事件
+            if (event.keyCode == "13") {
+                search_keys();
+            }
+        });
+
+        search_keys();
+
+    });
+</script>
 </html>

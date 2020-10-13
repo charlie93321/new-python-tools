@@ -1,4 +1,6 @@
+# encoding=utf-8
 import gzip
+import json
 from StringIO import StringIO
 
 import redis
@@ -28,6 +30,7 @@ VALUES (93, '100*150mm', 'ship.config.label.template.size.thermal.fifteen', 1, 1
         '/10x15/label/shopee-je-my_15.ftl', 1);
 '''
 
+
 def gzip_compress(buf):
     out = StringIO()
     with gzip.GzipFile(fileobj=out, mode="w") as f:
@@ -41,12 +44,22 @@ def gzip_decompress(buf):
         result = f.read()
     return result
 
-redis = StrictRedis(host='124.70.208.68', port=6379, db=0, password='hadoop')
 
+redis = StrictRedis(host='124.70.208.68', port=6379, db=1, password='hadoop')
 
-redis.set(name='shopee-my-express-online-sql-gzip',value=gzip_compress(lines))
+# redis.set(name='shopee-my-express-online-sql-gzip',value=gzip_compress(lines))
 
-print len(gzip_decompress(redis.get('shopee-my-express-online-sql-zip')))
-print len(redis.get('shopee-my-express-online-sql-gzip'))
+# print len(gzip_decompress(redis.get('shopee-my-express-online-sql-zip')))
+# print len(redis.get('shopee-my-express-online-sql-gzip'))
+data = {
+    "zh": "产品",
+    "en": "Product SKU",
+    "in": "SKU Produk",
+    "th": "th",
+    "vi": "vi"
+}
 
+redis.hset(name='html.listing.edit.comm.add.productSKU', key='content', value=json.dumps(data, ensure_ascii=False))
+redis.hset(name='html.listing.edit.comm.add.productSKU', key='version', value='1')
+redis.hset(name='html.listing.edit.comm.add.productSKU', key='desc', value='产品')
 redis.close()
