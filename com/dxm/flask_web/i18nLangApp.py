@@ -1,26 +1,9 @@
-import base64
 import json
-from random import Random
 
+from flask import request
 from redis import StrictRedis
 
-import com.dxm.flask_web.i18nLangApp
-from flask import Flask, send_from_directory, request
-
 from app import app
-
-class i18n_entity:
-    def __init__(self,key,zh,en,version,desc):
-        self.key=key
-        self.zh=zh
-        self.en=en
-        self.version=version
-        self.desc=desc
-
-
-
-
-
 
 redisContext = {'cli':None}
 

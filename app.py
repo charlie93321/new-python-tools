@@ -9,6 +9,6 @@ def hello_world():
 
 
 from com.dxm.flask_web.i18nLangApp import *
-
+from com.dxm.flask_web.sqlApp import *
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5500,debug=True)

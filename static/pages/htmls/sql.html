@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>上线脚本查看页面</title>
+    <link rel="stylesheet" href="static/pages/css/bootstrap.min.css">
+    <script type="text/javascript" src="static/pages/js/jquery.min.js"></script>
+    <script type="text/javascript" src="static/pages/js/popper.min.js"></script>
+    <script type="text/javascript" src="static/pages/js/bootstrap.min.js"></script>
+    <style>
+        .body {
+            font-family: 'Consolas', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
+        }
+    </style>
+
+    <script>
+        function downloadSqlFile(that) {
+            debugger;
+              $.get("/sql/download?key="+$(that).attr("key"),function (data) {
+                        var data=JSON.parse(data);
+                        window.open('/'+data['path'])
+              });
+        }
+    </script>
+
+</head>
+<body style="margin-left: 80px;margin-top: 50px">
+
+<div class="row" style="margin-top: 15px;margin-bottom: 10px">
+    <input class="form-control input col-md-3" placeholder="key" id="keys"/>
+    <input class="form-control input col-md-3 offset-md-1" placeholder="描述" id="desc" />
+    <select class="form-control col-md-1 offset-md-1" id="date" >
+            <option>选择日期</option>
+			<option>2020-09</option>
+			<option>2020-10</option>
+			<option>2020-11</option>
+			<option>2020-12</option>
+			<option>2021-01</option>
+	</select>
+
+    <a class="btn btn-primary col-md-1 offset-md-1" id="search" >搜索</a>
+</div>
+<div class="row" style="margin-bottom:10px ">
+    <a class="btn btn-danger col-md-1 offset-md-10">导出</a>
+</div>
+<div class="row">
+    <table class="table .table-striped .table-bordered .table-hover .table-condensed" style="width:92%">
+        <thead>
+        <th>key</th>
+        <th>描述</th>
+        <th>时间</th>
+        <th>操作</th>
+        </thead>
+        <tbody id="data">
+
+        </tbody>
+    </table>
+</div>
+</body>
+<script>
+    function getParams() {
+        var keys = $("#keys").val();
+        var desc = $("#desc").val();
+        var date = $("#date").val();
+        var params='';
+        if(keys && keys.trim().length>0){
+            params='key='+keys;
+        }
+
+        if(desc && desc.trim().length>0){
+            if(params.length>0){
+                params+="&";
+            }
+            params+='desc='+desc;
+        }
+        if(date && date.trim().length>0 && date!='选择日期'){
+            if(params.length>0){
+                params+="&";
+            }
+            params+='date='+date;
+        }
+        if(params.length>0){
+            params="?"+params
+        }
+        return params;
+    }
+    $(function () {
+        function search_keys() {
+            var params = getParams();
+            $.get('/sql/search' + params, function (data) {
+                var ls = JSON.parse(data)['list'];
+                $("#data").empty();
+                $.each(ls, function (index, item) {
+                    var tr = $("<tr></tr>");
+                    tr.append("<td class='td_key' >" + item['key'] + "</td>");
+                    tr.append("<td class='td_desc'  >" + item['desc'] + "</td>");
+                    tr.append("<td class='td_date' >" + item['date'] + "</td>");
+                    tr.append("<td><a  key='"+item['key']+"' class='btn btn-success' onclick='downloadSqlFile(this)'>下载</a></td>");
+                    $("#data").append(tr);
+                })
+
+            });
+        }
+
+        $('#search').bind('click', function (event) {//监听sim卡回车事件
+                search_keys();
+        });
+
+        search_keys();
+
+    });
+</script>
+</html>

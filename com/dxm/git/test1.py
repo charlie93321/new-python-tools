@@ -1,6 +1,6 @@
 import git
 
-r = git.Git(r"E:\charliespace\bigseller")
+r = git.Git(r"E:\charliespace\remotegit\bigseller")
 
 
 class BranchInfo:
