@@ -1,5 +1,7 @@
+import gzip
 import json
 import os
+from StringIO import StringIO
 
 from datetime import datetime
 
@@ -8,6 +10,21 @@ from pathlib import Path
 from redis import StrictRedis
 
 from app import app
+
+
+def gzip_compress(buf):
+    out = StringIO()
+    with gzip.GzipFile(fileobj=out, mode="w") as f:
+        f.write(buf)
+    return out.getvalue()
+
+
+def gzip_decompress(buf):
+    obj = StringIO(buf)
+    with gzip.GzipFile(fileobj=obj) as f:
+        result = f.read()
+    return result
+
 
 redisContext = {'cli': None}
 
@@ -92,5 +109,5 @@ def sql_download():
 
     with open(dir + "/{}.sql".format(key), 'w') as f:
         newData = json.loads(value, encoding='utf-8')
-        f.write(newData['content'])
-    return json.dumps({'path': dir + "/{}.sql".format(key)},ensure_ascii=False)
+        f.write(gzip_decompress(newData['content']))
+    return json.dumps({'path': dir + "/{}.sql".format(key)}, ensure_ascii=False)
