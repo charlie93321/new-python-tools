@@ -109,5 +109,5 @@ def sql_download():
 
     with open(dir + "/{}.sql".format(key), 'w') as f:
         newData = json.loads(gzip_decompress(value), encoding='utf-8')
-        f.write(gzip_decompress(newData['content']))
+        f.write(newData['content'])
     return json.dumps({'path': dir + "/{}.sql".format(key)}, ensure_ascii=False)
