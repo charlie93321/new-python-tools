@@ -65,11 +65,11 @@ redis = StrictRedis(host='124.70.208.68', port=6379, db=2, password='hadoop')
 # print len(redis.get('shopee-my-express-online-sql-gzip'))
 data = {
     "key": "sql.poslaju.qrcode",
-    "content":gzip_compress(lines),"desc":"qr code 识别",
+    "content":lines,"desc":"qr code 识别",
     "date":'2020-10-14'
 }
 
-redis.set(name='sql.poslaju.qrcode', value=json.dumps(data, ensure_ascii=False))
+redis.set(name='sql.poslaju.qrcode', value=gzip_compress(json.dumps(data, ensure_ascii=False)))
 print  redis.get('sql.poslaju.qrcode')
 
 

@@ -77,7 +77,7 @@ def sql_search():
         for key in keys:
             value = redisContext['cli'].get(key)
             if not is_empty(value):
-                obj = json.loads(value, encoding='utf-8')
+                obj = json.loads(gzip_decompress(value), encoding='utf-8')
                 is_add = True
                 if desc is not None:
                     if desc not in obj['desc']:
@@ -108,6 +108,6 @@ def sql_download():
         os.makedirs(dir)
 
     with open(dir + "/{}.sql".format(key), 'w') as f:
-        newData = json.loads(value, encoding='utf-8')
+        newData = json.loads(gzip_decompress(value), encoding='utf-8')
         f.write(gzip_decompress(newData['content']))
     return json.dumps({'path': dir + "/{}.sql".format(key)}, ensure_ascii=False)
