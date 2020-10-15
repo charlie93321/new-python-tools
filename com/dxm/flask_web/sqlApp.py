@@ -1,6 +1,7 @@
 import gzip
 import json
 import os
+import sys
 from StringIO import StringIO
 
 from datetime import datetime
@@ -93,6 +94,9 @@ def sql_search():
 
 @app.route("/sql/download")
 def sql_download():
+    reload(sys)
+    sys.setdefaultencoding("utf-8")
+
     dateStr = datetime.strftime(datetime.now(), '%Y/%m/%d')
     if redisContext['cli'] is None:
         redisContext['cli'] = StrictRedis(host='124.70.208.68', port=6379, db=2, password='hadoop')
